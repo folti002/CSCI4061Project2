@@ -25,8 +25,8 @@ void searchPatternInFile(char* path, char* pattern){
 	}
 
 	//Read file line by line and check if pattern exists in the line
-
-	char *phrase;
+	
+	char *phrase = malloc(MAX_LINE_LENGTH);
 
 	while(!feof(fp))
 	{
@@ -34,6 +34,7 @@ void searchPatternInFile(char* path, char* pattern){
 	printf("%s: %s", path, phrase);
 	}	
 		
+	free(phrase);
 	//Close fp
 	fclose(fp);
 }
