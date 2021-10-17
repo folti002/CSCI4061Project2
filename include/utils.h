@@ -7,6 +7,8 @@
 #define MAX_PATH_LENGTH 1024
 #define MAX_WRITE_LENGTH 5000 
 #define MAX_INODE_LENGTH 128
+#define MAX_LINE_LENGTH 1000
+#define MAX_FILE_SIZE 5000
 
 /*
 	Search for pattern in the file given by path
