@@ -23,9 +23,16 @@ void searchPatternInFile(char* path, char* pattern){
 		fprintf(stderr,"Error opening file: %s \n",path);
 		return;
 	}
-	
+
 	//Read file line by line and check if pattern exists in the line
-		
+
+	char *phrase;
+
+	while(!feof(fp))
+	{
+	phrase = strstr(fp, pattern);
+	printf("%s: %s", path, phrase);
+	}	
 		
 	//Close fp
 	fclose(fp);
