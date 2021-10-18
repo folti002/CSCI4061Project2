@@ -37,6 +37,8 @@ int main(int argc, char** argv){
 	
 	char* path = argv[1];
 	char* pattern = argv[2];
+
+	printf("Child with path: %s and pattern: %s\n", path, pattern);
 	
 	close(STDIN_FILENO);
 	
