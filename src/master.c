@@ -84,7 +84,8 @@ int main(int argc, char** argv){
 			exit(EXIT_FAILURE);
 		}
 	}	
-	
+
+	// Free malloc'd variable for holding stats of a file	
 	free(st);
 
 	//Wait for all children to complete
