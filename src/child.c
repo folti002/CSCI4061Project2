@@ -22,8 +22,31 @@ void dirTraverse(const char *name, char * pattern)
 {
 	DIR *dir;
 	struct dirent *entry;
+	struct stat* st = (struct stat*) malloc(sizeof(struct stat));
+
+	dir = opendir(name);
+	if(dir == NULL){
+		fprintf(stderr, "ERROR: Failed to open path: %s\n", name);
+	}
 	
 	//Recursively traverse the directory and call SearchForPattern when neccessary
+	while((entry = readdir(dir)) != NULL){
+		if (!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, "..")) continue;
+		char entry_name[MAX_PATH_LENGTH] = {'\0'};
+		snprintf(entry_name, sizeof(entry_name), "%s/%s", name, entry->d_name);
+		stat(entry_name, st);
+
+		if(S_ISDIR(st->st_mode)){
+			dirTraverse(entry_name, pattern);
+		} else if(S_ISREG(st->st_mode)){
+			searchPatternInFile(entry_name, pattern);
+		} else {
+			// This is neither a regular file nor a directory, so for now print error
+			printf("This file is neither a regular file nor a directory.\n");
+			exit(EXIT_FAILURE);
+		}
+	}
+	free(st);
 }
 
 int main(int argc, char** argv){
