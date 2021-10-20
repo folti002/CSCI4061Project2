@@ -38,7 +38,6 @@ int main(int argc, char** argv){
 		//Process each file/directory in the root dir
 		char entry_name[MAX_PATH_LENGTH] = {'\0'};
 		snprintf(entry_name, sizeof(entry_name), "%s/%s", path, entry->d_name);
-
 		stat(entry_name, st);
 		//printf("%s\n", entry_name);
 
