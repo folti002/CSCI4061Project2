@@ -1,11 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include<sys/wait.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <dirent.h>
-#include<string.h>
-#include<stdlib.h>
+#include <string.h>
+#include <stdlib.h>
 #include "utils.h"
 
 
@@ -18,11 +18,9 @@
 	Note: Feel free to modify the function header if neccessary
 	
 */
-void dirTraverse(const char *name, char * pattern)
-{
+void dirTraverse(const char *name, char * pattern){
 	DIR *dir;
 	struct dirent *entry;
-	struct stat* st = (struct stat*) malloc(sizeof(struct stat));
 
 	dir = opendir(name);
 	if(dir == NULL){
@@ -32,13 +30,13 @@ void dirTraverse(const char *name, char * pattern)
 	//Recursively traverse the directory and call SearchForPattern when neccessary
 	while((entry = readdir(dir)) != NULL){
 		if (!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, "..")) continue;
+
 		char entry_name[MAX_PATH_LENGTH] = {'\0'};
 		snprintf(entry_name, sizeof(entry_name), "%s/%s", name, entry->d_name);
-		stat(entry_name, st);
 
-		if(S_ISDIR(st->st_mode)){
+		if(entry->d_type == DT_DIR){
 			dirTraverse(entry_name, pattern);
-		} else if(S_ISREG(st->st_mode)){
+		} else if(entry->d_type == DT_REG){
 			searchPatternInFile(entry_name, pattern);
 		} else {
 			// This is neither a regular file nor a directory, so for now print error
@@ -46,14 +44,11 @@ void dirTraverse(const char *name, char * pattern)
 			exit(EXIT_FAILURE);
 		}
 	}
-	free(st);
 }
 
 int main(int argc, char** argv){
-
 	if(argc !=3){
-	
-		fprintf(stderr,"Child process : %d recieved %d arguments, expected 3 \n",getpid(), argc);
+		fprintf(stderr,"Child process : %d recieved %d arguments, expected 3 \n", getpid(), argc);
 		fprintf(stderr,"Usage child.o [Directory Path] [Pattern] \n");
 		exit(EXIT_FAILURE);
 	}
@@ -61,13 +56,8 @@ int main(int argc, char** argv){
 	char* path = argv[1];
 	char* pattern = argv[2];
 
-	printf("Child with path: %s and pattern: %s\n", path, pattern);
-	
 	close(STDIN_FILENO);
-	
-	dirTraverse(path,pattern);
-	
+	dirTraverse(path, pattern);
 	close(STDOUT_FILENO);
-	
 	exit(EXIT_SUCCESS);
 }
