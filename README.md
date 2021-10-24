@@ -25,7 +25,7 @@ Replace the inputFolder with the desired input folder to read strings from.
 Replace the pattern with whatever string you want to search for in the input folder. 
 
 ## Test Machine Information: 
-test machine: csel-kh1250-01.cselabs.umn.edu 
-group number: G[27] 
-name: Reed Fazenbaker, Mikkel Folting 
+test machine: csel-kh1250-01.cselabs.umn.edu  
+group number: G[27]  
+name: Reed Fazenbaker, Mikkel Folting  
 x500: fazen007, folti002
