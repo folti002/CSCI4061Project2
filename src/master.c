@@ -1,3 +1,9 @@
+/* test machine: csel-kh1250-01.cselabs.umn.edu 
+ * group number: G[27] 
+ * name: Reed Fazenbaker, Mikkel Folting
+ * x500: fazen007, folti002
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -51,10 +57,8 @@ int main(int argc, char** argv){
 				exit(EXIT_FAILURE);
 			}
 
-			// Create a new child process
+			// Create a new child process and check which process we are in
 			pid = fork();
-
-			// Check which process we are in
 			if(pid < 0){
 				// Error
 				fprintf(stderr, "ERROR: fork failed.\n");
@@ -63,8 +67,10 @@ int main(int argc, char** argv){
 				// Close write end of the pipe
 				close(fds[1]);
 
+				// Variable to store the read line from a file
 				char* line = (char*) malloc(sizeof(char) * MAX_LINE_LENGTH);
 				memset(line, '\0', (sizeof(char) * MAX_LINE_LENGTH));
+
 				// Read pipes of all children and print to stdout
 				// Assumption : Pipe never gets full
 				while(read(fds[0], line, MAX_LINE_LENGTH)){
@@ -84,7 +90,8 @@ int main(int argc, char** argv){
 					exit(EXIT_FAILURE);
 				}
 				close(fds[1]);
-				// Execute the child program so it can start 
+
+				// Execute the child program so it can start reading from files
 				execl("child", "child", entry_name, pattern, NULL);
 				fprintf(stderr, "ERROR: Failed to execute child\n");
 				exit(EXIT_FAILURE);
@@ -97,6 +104,7 @@ int main(int argc, char** argv){
 				exit(EXIT_FAILURE);
 			}
 
+			// Read through regular file and print any matches
 			char line[MAX_LINE_LENGTH];
 			memset(line, '\0', MAX_LINE_LENGTH);
 			while((fgets(line, MAX_LINE_LENGTH, fp2)) != NULL){
