@@ -1,3 +1,9 @@
+/* test machine: csel-kh1250-01.cselabs.umn.edu 
+ * group number: G[27] 
+ * name: Reed Fazenbaker, Mikkel Folting
+ * x500: fazen007, folti002
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -22,18 +28,20 @@ void dirTraverse(const char *name, char * pattern){
 	DIR *dir;
 	struct dirent *entry;
 
+	// Open directory
 	dir = opendir(name);
 	if(dir == NULL){
 		fprintf(stderr, "ERROR: Failed to open path: %s\n", name);
 	}
 	
-	//Recursively traverse the directory and call SearchForPattern when neccessary
+	// Recursively traverse the directory and call searchPatternInFile when neccessary
 	while((entry = readdir(dir)) != NULL){
 		if (!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, "..")) continue;
 
 		char entry_name[MAX_PATH_LENGTH] = {'\0'};
 		snprintf(entry_name, sizeof(entry_name), "%s/%s", name, entry->d_name);
 
+		// Check which kind of file we are currently looking at
 		if(entry->d_type == DT_DIR){
 			dirTraverse(entry_name, pattern);
 		} else if(entry->d_type == DT_REG){
@@ -56,6 +64,7 @@ int main(int argc, char** argv){
 	char* path = argv[1];
 	char* pattern = argv[2];
 
+	// Close file descriptors and traverse the given directory
 	close(STDIN_FILENO);
 	dirTraverse(path, pattern);
 	close(STDOUT_FILENO);

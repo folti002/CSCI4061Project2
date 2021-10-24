@@ -1,3 +1,9 @@
+/* test machine: csel-kh1250-01.cselabs.umn.edu 
+ * group number: G[27] 
+ * name: Reed Fazenbaker, Mikkel Folting
+ * x500: fazen007, folti002
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <stdlib.h>
@@ -14,6 +20,7 @@
 		pattern : pattern to be searched
 */
 void searchPatternInFile(char* path, char* pattern){
+	// Open the file inputted
 	FILE * fp;
 	fp = fopen(path, "r");
 	if (fp == NULL){
