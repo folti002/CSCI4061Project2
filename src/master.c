@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include "utils.h"
 
-
-
 int main(int argc, char** argv){
 	if(argc != 3){
 		fprintf(stderr,"Usage ./a.out [Path to Directory] [Pattern to search] \n");
