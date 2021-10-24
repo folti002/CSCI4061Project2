@@ -4,7 +4,7 @@ Reed Fazenbaker (fazen007)
 Mikkel Folting (folti002)  
 
 ## Contributions: 
-Mikkel Folting: Worked on creating the correct amount of children, piping, and reading from pipes in master. 
+Mikkel Folting: Worked on creating the correct amount of children, piping, and reading from pipes in master.  
 Reed Fazenbaker: Worked on searching for a pattern in a given file and directory traversal.
 
 ## Assumptions: 
@@ -20,8 +20,8 @@ Type the above command into the home directory of the project.
 ```
 ./master inputFolder pattern
 ```
-Type the above command into the home directory of the project after calling make. 
-Replace the inputFolder with the desired input folder to read strings from. 
+Type the above command into the home directory of the project after calling make.  
+Replace the inputFolder with the desired input folder to read strings from.  
 Replace the pattern with whatever string you want to search for in the input folder. 
 
 ## Test Machine Information: 
