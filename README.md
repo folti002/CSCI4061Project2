@@ -5,7 +5,7 @@ Mikkel Folting (folti002)
 
 ## Contributions: 
 Mikkel Folting: Worked on creating the correct amount of children, piping, and reading from pipes in master.  
-Reed Fazenbaker: Worked on searching for a pattern in a given file and directory traversal.
+Reed Fazenbaker: Worked on searching for a pattern in a given file, writing to the pipe from the child, and directory traversal.
 
 ## Assumptions: 
 No significant assumptions were made outside the project specification. 
