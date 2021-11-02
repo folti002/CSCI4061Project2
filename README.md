@@ -1,4 +1,4 @@
-# CSCI 4061 Project 1 - Parallel String Matching
+# CSCI 4061 Project 2 - Parallel String Matching
 ## Project Group Number: 27  
 Reed Fazenbaker (fazen007)  
 Mikkel Folting (folti002)  
